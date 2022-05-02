@@ -5,7 +5,7 @@ from dash.dependencies import Input, Output
 import pandas as pd
 import plotly.express as go
 
-df1 = pd.read_csv('Data/calories.csv')
+df1 = pd.read_csv('../Data/calories.csv')
 
 app = dash.Dash()
 
@@ -55,7 +55,7 @@ app.layout = html.Div(children=[
               Input('food-input', 'value'))
 def calories(food_list):
     food_list = food_list.split('\n')
-    df1 = pd.read_csv('Data/calories.csv')
+    df1 = pd.read_csv('../Data/calories.csv')
 
     filtered_df = df1[df1['FoodItem'].isin(food_list)]
 
@@ -70,7 +70,7 @@ def calories(food_list):
               Input('food-input', 'value'))
 def energy(food_list):
     food_list = food_list.split('\n')
-    df1 = pd.read_csv('Data/calories.csv')
+    df1 = pd.read_csv('../Data/calories.csv')
     filtered_df = df1[df1['FoodItem'].isin(food_list)]
     filtered_df = filtered_df.apply(lambda x: x.str.strip() if x.dtype == "object" else x)
     fig = go.pie(filtered_df, values='KJ_per100grams', names='FoodItem')
@@ -80,7 +80,7 @@ def energy(food_list):
 @app.callback(Output('calorie-top-10', 'figure'),
               Input('food-input', 'value'))
 def calorie_top_10(food_list):
-    df1 = pd.read_csv('Data/calories.csv')
+    df1 = pd.read_csv('../Data/calories.csv')
     df1 = df1.head(1000)
     sorted_df = df1.sort_values(['Cals_per100grams'], ascending=False).head(10)
     fig = go.bar(sorted_df, x='FoodItem', y='Cals_per100grams')
@@ -90,7 +90,7 @@ def calorie_top_10(food_list):
 @app.callback(Output('food-bubble', 'figure'),
               Input('food-input', 'value'))
 def bubble_chart(food_list):
-    df1 = pd.read_csv('Data/calories.csv')
+    df1 = pd.read_csv('../Data/calories.csv')
     df1 = df1.head(1000)
     fig = go.scatter(df1, x='Cals_per100grams', y='KJ_per100grams', size='Cals_per100grams', color='FoodCategory', hover_name='FoodItem')
     return fig
