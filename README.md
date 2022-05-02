@@ -4,3 +4,10 @@ The goal of our final project is to help everyone to maintain a balanced diet by
 
 Product Vision:
 For people who care about health/nutrition, EatWell is a diet tracking web application that aids users in maintaining a proper diet. Unlike MyFitnessPal, our product provides accurate and personalized diets for users.
+
+
+Installation Steps:
+Via pip, install the following packages:
+**dash**
+**pandas**
+**plotly**
